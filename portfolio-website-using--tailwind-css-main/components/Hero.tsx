@@ -15,10 +15,10 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
             className="flex-1 flex-col gap-[1.2rem]"
           >
-            <h2 className="text-xl">
+            <h2 className="text-2xl">
               Hi, I&apos;m{" "}
               <span className="font-bold text-3xl bg-gradient-to-tl from-[#a5d0d3] to-[#21a392] text-transparent bg-clip-text inline-block">
                 <Typewriter
