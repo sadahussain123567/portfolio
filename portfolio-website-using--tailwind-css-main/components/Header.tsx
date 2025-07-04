@@ -20,7 +20,7 @@ const Header = () => {
             {/* Logo */}
             <div className="flex items-center">
               <Image src="/favicon.png" alt="logo" width={50} height={50} />
-              <span classname="font-bold">SADDAM</span>
+              <span className="font-bold">SADDAM</span>
             </div>
 
             {/* Hamburger Menu */}
