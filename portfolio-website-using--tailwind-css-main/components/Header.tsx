@@ -19,7 +19,7 @@ export default function Header() {
         <div className="bg-lime-400 text-black font-bold w-8 h-8 flex items-center justify-center rounded-full">
           S
         </div>
-        <span className="font-semibold text-lg">Sadam Hussain</span>
+        <span className="font-semibold text-lg">SADDAM HUSSAIN</span>
       </div>
 
       {/* Desktop Nav */}
