@@ -9,7 +9,7 @@ const About = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024); 
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
@@ -20,20 +20,22 @@ const About = () => {
   const shortText = fullText.slice(0, 93) + ".....";
 
   return (
-    <div className="max-w-screen-xl m-auto p-4">
-      <div className="lg:flex-row flex-col flex items-center justify-between mt-2 gap-20">
-        {/* ✅ Motion Only on Text Block */}
+    <section className="max-w-screen-xl mx-auto px-6 pt-[120px] sm:pt-[140px]">
+      {/* Main Flex Row */}
+      <div className="flex flex-col lg:flex-row items-start justify-center w-full gap-16">
+        
+        {/* Left Text Block */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
-          className="flex-1 flex-col gap-[1.2rem]"
+          className="flex-1 max-w-[500px] flex-col gap-[1.2rem]"
         >
-          <h2 className="font-bold text-[2.5rem] bg-gradient-to-tl from-[#a5d0d3] to-[#21a392] text-transparent bg-clip-text">
+          <h2 className="font-bold text-3xl sm:text-[2.5rem] bg-gradient-to-tl from-[#a5d0d3] to-[#21a392] text-transparent bg-clip-text">
             About
           </h2>
 
-          <p className="text-justify text-[1.2rem] leading-relaxed">
+          <p className="text-justify text-base sm:text-[1.2rem] leading-relaxed">
             {isMobile && !showMore ? shortText : fullText}
           </p>
 
@@ -46,11 +48,12 @@ const About = () => {
             </button>
           )}
 
+          {/* Skills Section */}
           <div>
-            <h2 className="text-[2.5rem] mt-8 bg-gradient-to-tl from-[#a5d0d3] to-[#21a392] text-transparent bg-clip-text">
+            <h2 className="text-3xl sm:text-[2.5rem] mt-8 bg-gradient-to-tl from-[#a5d0d3] to-[#21a392] text-transparent bg-clip-text">
               Skills
             </h2>
-            <div className="flex items-center justify-between mt-[10px] flex-wrap gap-4">
+            <div className="flex items-center justify-center lg:justify-start mt-[10px] flex-wrap gap-6">
               <Skills src="/html.png" />
               <Skills src="/css.png" />
               <Skills src="/js.png" />
@@ -62,18 +65,18 @@ const About = () => {
           </div>
         </motion.div>
 
-        {/* ✅ Static Image */}
-        <div className="flex justify-center items-center mt-8 lg:mt-0">
+        {/* Right Image Block */}
+        <div className="flex-1 max-w-[380px] flex justify-center lg:justify-end">
           <Image
             src="/image1.png"
             alt="Profile Picture"
-            width={400}
-            height={400}
-            className="rounded-full"
+            width={380}
+            height={380}
+            className="rounded-full object-cover"
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
