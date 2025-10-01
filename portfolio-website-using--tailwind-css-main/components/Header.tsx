@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { Menu } from "lucide-react";
-import Image from "next/image";
+import { Menu, X } from "lucide-react"; // Hamburger + Close icon
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Header = () => {
+export default function Header() {
   const [isActive, setIsActive] = useState(false);
 
   const handleCloseMenu = () => {
@@ -14,73 +13,59 @@ const Header = () => {
   };
 
   return (
-    <header className="border-b border-gray-700 bg-gradient-to-r from-[#083a3e] to-[#06352f] z-50 relative">
-      <div className="max-w-screen-xl m-auto p-4">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <Image src="/favicon.png" alt="logo" width={50} height={50} />
-            <span className="font-bold text-white text-xl">SADDAM</span>
-          </div>
+    <header className="fixed top-4 left-1/2 transform -translate-x-1/2 w-[90%] max-w-6xl bg-gradient-to-r from-[#083a3e] to-[#06352f] text-white rounded-full shadow-lg px-6 py-3 flex items-center justify-between z-50">
+      {/* Left - Logo/Name */}
+      <div className="flex items-center space-x-2">
+        <div className="bg-lime-400 text-black font-bold w-8 h-8 flex items-center justify-center rounded-full">
+          S
+        </div>
+        <span className="font-semibold text-lg">Sadam Hussain</span>
+      </div>
 
-          {/* Hamburger Menu */}
-          <div className="absolute top-7 right-4 sm:hidden z-50">
-            <Menu
-              onClick={() => setIsActive(!isActive)}
-              className="text-white cursor-pointer"
-            />
-          </div>
+      {/* Desktop Nav */}
+      <nav className="hidden md:flex space-x-8 text-sm font-medium">
+        <Link href="/" className="hover:text-lime-400 transition">
+          Home
+        </Link>
+        <Link href="/about" className="hover:text-lime-400 transition">
+          About
+        </Link>
+        <Link href="/contact" className="hover:text-lime-400 transition">
+          Contact
+        </Link>
+      </nav>
 
-          {/* Mobile Menu */}
-          <AnimatePresence>
-            {isActive && (
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="absolute top-14 left-0 w-full bg-gradient-to-r from-[#083a3e] to-[#06352f] sm:hidden z-40"
-              >
-                <ul className="flex flex-col items-center gap-4 p-6 text-white">
-                  <li>
-                    <Link
-                      href="/"
-                      onClick={handleCloseMenu}
-                      className="text-[1.2rem] font-extrabold hover:text-cyan-300"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/about"
-                      onClick={handleCloseMenu}
-                      className="text-[1.2rem] font-extrabold hover:text-cyan-300"
-                    >
-                      About
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/contact"
-                      onClick={handleCloseMenu}
-                      className="text-[1.2rem] font-extrabold hover:text-cyan-300"
-                    >
-                      Contact
-                    </Link>
-                  </li>
-                </ul>
-              </motion.div>
-            )}
-          </AnimatePresence>
+      {/* Hamburger Icon for Mobile */}
+      <div className="md:hidden">
+        {isActive ? (
+          <X
+            onClick={() => setIsActive(false)}
+            className="text-white w-6 h-6 cursor-pointer"
+          />
+        ) : (
+          <Menu
+            onClick={() => setIsActive(true)}
+            className="text-white w-6 h-6 cursor-pointer"
+          />
+        )}
+      </div>
 
-          {/* Desktop Menu */}
-          <nav className="hidden sm:flex">
-            <ul className="flex justify-between items-center gap-16">
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="absolute top-16 left-0 w-full bg-gradient-to-r from-[#083a3e] to-[#06352f] rounded-b-2xl shadow-lg md:hidden z-40"
+          >
+            <ul className="flex flex-col items-center gap-6 p-6 text-white">
               <li>
                 <Link
                   href="/"
-                  className="text-white text-[1.2rem] font-medium transform transition-transform duration-200 hover:scale-110 hover:text-cyan-300"
+                  onClick={handleCloseMenu}
+                  className="text-[1.1rem] font-bold hover:text-lime-400"
                 >
                   Home
                 </Link>
@@ -88,7 +73,8 @@ const Header = () => {
               <li>
                 <Link
                   href="/about"
-                  className="text-white text-[1.2rem] font-medium transform transition-transform duration-200 hover:scale-110 hover:text-cyan-300"
+                  onClick={handleCloseMenu}
+                  className="text-[1.1rem] font-bold hover:text-lime-400"
                 >
                   About
                 </Link>
@@ -96,17 +82,17 @@ const Header = () => {
               <li>
                 <Link
                   href="/contact"
-                  className="text-white text-[1.2rem] font-medium transform transition-transform duration-200 hover:scale-110 hover:text-cyan-300"
+                  onClick={handleCloseMenu}
+                  className="text-[1.1rem] font-bold hover:text-lime-400"
                 >
                   Contact
                 </Link>
               </li>
             </ul>
-          </nav>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
-};
+}
 
-export default Header;
